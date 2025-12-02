@@ -26,17 +26,17 @@
 // |  ESC  |  1  |  2   |  3   |   4   |  5   |                    |   6   |   7   |  8   |  9   |   0   |  BKSP |
 // | PG_UP |  Q  |  W   |  E   |   R   |  T   |                    |   Y   |   U   |  I   |  O   |   P   | PG_DN |
 // |  TAB  |  A  |  S   |  D   |   F   |  G   |                    |   H   |   J   |  K   |  L   |   ;   |  RET  |
-// |  ALT  |  Z  |  X   |  C   |   V   |  B   |  MUTE  |   |       |   N   |   M   |  ,   |  .   |   '   |  CTRL |
-//               | CAPS | ALT  | LOWER | GUI  |  SHIFT |   | SPACE | RAISE | MINUS | DEL  | RALT |
+// |  CTRL |  Z  |  X   |  C   |   V   |  B   |  MUTE  |   |       |   N   |   M   |  ,   |  .   |   '   |  ALT  |
+//               | CAPS | ALT  | LOWER | GUI  |  SHIFT |   | SPACE | RAISE | MINUS | DEL  | CTRL |
             bindings = <
 &kp ESC   &kp N1 &kp N2    &kp N3    &kp N4    &kp N5                          &kp N6 &kp N7    &kp N8    &kp N9   &kp N0   &kp BSPC
 &kp PG_UP &kp Q  &kp W     &kp E     &kp R     &kp T                           &kp Y  &kp U     &kp I     &kp O    &kp P    &kp PG_DN
 &kp TAB   &kp A  &kp S     &kp D     &kp F     &kp G                           &kp H  &kp J     &kp K     &kp L    &kp SEMI &kp RET
-&kp LALT  &kp Z  &kp X     &kp C     &kp V     &kp B     &kp C_MUTE  &none     &kp N  &kp M     &kp COMMA &kp DOT  &kp SQT  &kp RCTRL
-                 &kp CAPS  &kp LCTRL &kp LGUI  &mo 1     &kp LSHFT   &kp SPACE &mo 2  &kp MINUS &kp DEL   &kp RALT
+&kp LCTRL &kp Z  &kp X     &kp C     &kp V     &kp B     &kp C_MUTE  &kp C_PP  &kp N  &kp M     &kp COMMA &kp DOT  &kp SQT  &kp RALT
+                 &kp CAPS  &kp LALT  &kp LGUI  &mo 1     &kp SPACE   &kp LSHFT &mo 2  &kp MINUS &kp RCTRL &kp DEL
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
 
         lower_layer {
@@ -47,14 +47,14 @@
 // |       |  F1 |  F2 |  F3  |  F4  |  F5  |        |  |       |  F6  |  F7   |  F8   |  F9  |  F10  |       |
 //               |     |      |      |      |        |  |       | F12  |       |       |      |
             bindings = <
-&bt BT_CLR &bt BT_SEL 0     &bt BT_SEL 1      &bt BT_SEL 2      &bt BT_SEL 3 &bt BT_SEL 4                      &trans    &trans    &trans    &trans    &trans    &trans
-&trans     &kp N1           &kp N2            &kp N3            &kp N4       &kp N5                            &kp N6    &kp N7    &kp N8    &kp N9    &kp N0    &trans
-&trans     &kp DEL          &kp LEFT          &kp DOWN          &kp UP       &kp RIGHT                         &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &kp F11   &trans
-&trans     &kp F1           &kp F2            &kp F3            &kp F4       &kp F5       &bootloader  &none   &kp F6    &kp F7    &kp F8    &kp F9    &kp F10   &trans
-                            &trans            &trans            &trans       &trans       &trans       &trans  &kp F12   &trans    &trans    &trans
+&bt BT_CLR &bt BT_SEL 0     &bt BT_SEL 1      &bt BT_SEL 2      &bt BT_SEL 3 &bt BT_SEL 4                         &trans    &trans    &trans    &trans    &trans    &trans
+&trans     &kp N1           &kp N2            &kp N3            &kp N4       &kp N5                               &kp N6    &kp N7    &kp N8    &kp N9    &kp N0    &trans
+&trans     &kp DEL          &kp LEFT          &kp DOWN          &kp UP       &kp RIGHT                            &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &kp F11   &trans
+&trans     &kp F1           &kp F2            &kp F3            &kp F4       &kp F5       &kp C_PREV   &kp C_NEXT &kp F6    &kp F7    &kp F8    &kp F9    &kp F10   &trans
+                            &trans            &trans            &trans       &trans       &trans       &trans     &kp F12   &trans    &trans    &trans
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp HOME END>;
         };
 
         raise_layer {
@@ -65,14 +65,14 @@
 // |       |  /  |     |  `   |  +   |      |        |  |  boot | INS  |   ?   |   /   |      |   ~   |       |
 //               |     |      |      |  ~   |        |  |       |      |       |       |      |
             bindings = <
-&trans    &trans   &trans   &trans    &trans     &trans                        &trans    &trans    &trans          &trans   &trans    &trans
-&trans    &kp EXCL &kp AT   &kp HASH  &kp DLLR   &kp PRCNT                     &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR  &trans
-&trans    &kp LBKT &kp RBKT &kp LPAR  &kp RPAR   &kp UNDER                     &kp EQUAL &kp LBRC  &kp RBRC        &kp PIPE &kp BSLH  &trans
-&trans    &kp FSLH &trans   &kp GRAVE &kp PLUS   &trans    &none   &bootloader &kp INS   &kp QMARK &kp FSLH        &trans   &kp TILDE &trans
-                   &trans   &trans    &trans     &kp TILDE &trans  &trans      &trans    &trans    &trans          &trans
+&trans    &trans   &trans   &trans    &trans     &trans                                      &trans    &trans    &trans          &trans   &trans    &trans
+&trans    &kp EXCL &kp AT   &kp HASH  &kp DLLR   &kp PRCNT                                   &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR  &trans
+&trans    &kp LBKT &kp RBKT &kp LPAR  &kp RPAR   &kp UNDER                                   &kp EQUAL &kp LBRC  &kp RBRC        &kp PIPE &kp BSLH  &trans
+&trans    &kp FSLH &trans   &kp GRAVE &kp PLUS   &trans    &ext_power EP_TOG   &bootloader   &kp INS   &kp QMARK &kp FSLH        &trans   &kp TILDE &trans
+                   &trans   &trans    &trans     &kp TILDE &trans              &trans        &trans    &trans    &trans          &trans
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp C_BRI_DN C_BRI_UP>;
         };
     };
 };
